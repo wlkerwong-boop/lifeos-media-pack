@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>社媒流水线 · 安装与使用指南</title>
+<style>
+  :root { --ink:#2b2b26; --sub:#6b6b60; --line:#e5e0d5; --bg:#faf8f3; --card:#ffffff; --accent:#1f3d2b; --warn:#c25e2e; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--ink); line-height:1.75; font-size:16px; padding:20px 14px 60px; }
+  .wrap { max-width:680px; margin:0 auto; }
+  h1 { font-size:26px; line-height:1.4; margin:10px 0 6px; }
+  .sub { color:var(--sub); font-size:14px; margin-bottom:22px; }
+  h2 { font-size:19px; margin:34px 0 12px; padding-left:10px; border-left:4px solid var(--accent); }
+  h3 { font-size:16px; margin:18px 0 8px; }
+  p { margin:8px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:12px 0; }
+  .step { display:flex; gap:12px; margin:14px 0; }
+  .step .num { flex:0 0 30px; height:30px; border-radius:50%; background:var(--accent); color:#fff; font-weight:700; text-align:center; line-height:30px; font-size:15px; }
+  .say { background:#eef3ee; border-radius:8px; padding:10px 12px; font-size:15px; margin:10px 0; }
+  .say b { color:var(--accent); }
+  .say::before { content:"💬 "; }
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:14.5px; }
+  th,td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:#f2eee4; font-weight:600; }
+  .tscroll { overflow-x:auto; }
+  .warn { background:#fdf3ec; border:1px solid #f0d4c2; border-radius:12px; padding:14px 16px; margin:12px 0; }
+  .warn b { color:var(--warn); }
+  .ok { color:var(--accent); font-weight:600; }
+  code, .cmd { background:#f0ede4; border-radius:6px; padding:2px 7px; font-family:Menlo,Consolas,monospace; font-size:14px; }
+  .cmd { display:block; padding:10px 12px; margin:8px 0; word-break:break-all; }
+  ul,ol { padding-left:1.4em; margin:8px 0; }
+  li { margin:5px 0; }
+  .qa { margin:10px 0; }
+  .qa .q { font-weight:700; }
+  .flow { text-align:center; color:var(--sub); font-size:14px; margin:6px 0; line-height:1.9; }
+  .footer { margin-top:40px; padding-top:14px; border-top:1px solid var(--line); color:var(--sub); font-size:13px; text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>社媒流水线 · 安装与使用指南</h1>
+  <div class="sub">写给第一次用的你 · 全程 15 分钟 · 不需要懂任何代码</div>
+
+  <div class="card">
+    <p><b>这是一套什么东西？</b></p>
+    <p>一套装在 AI 助手身上的「写作技能包」，一共 7 个技能，帮你把「不知道发什么、写不出来、发出去心里没底」变成一条流水线：</p>
+    <p class="flow">建声音档案 → 帮你选题 → 写成文章 → 转口播稿/做图卡 → 发布前把关 → 每周看数据</p>
+    <p>你只需要动嘴说一句话，AI 按流程干活，<b>每一篇稿子最后都由你自己审核拍板</b>。</p>
+  </div>
+
+  <h2>一、装之前，确认 3 件事</h2>
+  <div class="step"><div class="num">1</div><div>你有一台<b>电脑</b>（Mac 或 Windows 都行）。手机上装不了，写稿这件事在电脑上做才舒服。</div></div>
+  <div class="step"><div class="num">2</div><div>电脑上有一个 AI 助手，比如 <b>Claude Code</b>（最对口）。你已有的 Hermes 如果支持「技能文件夹」，也能用——拿不准就把这条消息发给你的 AI 问一句：</div></div>
+  <div class="say">我有一个技能文件夹，里面是多个 SKILL.md 文件（agents skills 规范）。请告诉我应该拷到你哪个目录里你才能使用它们？</div>
+  <div class="step"><div class="num">3</div><div>准备工作区的文件夹位置想好一个名字（不用提前创建，AI 会帮你建）。</div></div>
+
+  <div class="warn"><b>关于 WorkBuddy：</b>如果 WorkBuddy 支持自定义指令或技能文件夹，同样把技能拷进去就能用；如果它不支持读取本地文件夹，那就用电脑上的 Claude Code / Hermes 来跑这套流水线，写好的稿子随手转发到手机发布。先用哪一个，取决于哪个工具能读你电脑里的文件。</div>
+
+  <h2>二、三步安装（照抄就行）</h2>
+
+  <h3>第 1 步 · 把技能放进 AI 的技能目录</h3>
+  <p>把整个 <code>skills</code> 文件夹解开（如果收到的是压缩包，先双击解压），然后在终端（Mac 叫「终端 Terminal」）里粘贴这两行，每行按一次回车：</p>
+  <div class="cmd">mkdir -p ~/.claude/skills</div>
+  <div class="cmd">cp -R skills/* ~/.claude/skills/</div>
+  <p>如果第 1 步问 AI 时它回答了别的目录（比如 <code>~/.agents/skills/</code>），就把第二行里的 <code>.claude</code> 换成它说的那个。</p>
+  <p><b>Windows 用户：</b>不用记命令。打开 AI 助手后直接说：「把桌面（或我解压的位置）的 skills 文件夹，拷到你读取技能的目录里」。让 AI 替你执行拷贝。</p>
+
+  <h3>第 2 步 · 验证装好了</h3>
+  <p>打开你的 AI 助手（比如启动 Claude Code），对它说：</p>
+  <div class="say">看看你装了哪些技能，有没有这 7 个：building-voice-base、picking-topics、writing-gongzhonggao、writing-koubogao、making-xhs-cards、checking-before-publish、reviewing-weekly</div>
+  <p><span class="ok">✓ 成功的样子：</span>它一个不落地报出 7 个名字。</p>
+
+  <h3>第 3 步 · 建你自己的「声音档案」（最重要的一步！）</h3>
+  <p>对 AI 说：</p>
+  <div class="say">帮我建声音基座</div>
+  <p>它会问你 6 个问题（你是谁、写给谁看、聊什么……）+ 到你电脑里翻你写过的东西（朋友圈、日志、群里的长消息都算）。10 分钟答完，它就记住「你的腔调」了，以后写什么都像你。</p>
+
+  <div class="warn"><b>千万别省这一步，也千万别用别人的声音档案。</b>声音档案（about-me.md / voice.md）是一个人的写作指纹——一家人的也不通用。谁没建自己的档案，AI 写出来的就是谁的味儿，不是谁的。</div>
+
+  <h2>三、日常怎么用：一句话点菜</h2>
+  <div class="tscroll">
+  <table>
+    <tr><th>你想干嘛</th><th>对 AI 说这句话</th></tr>
+    <tr><td>不知道发什么</td><td><b>「给我选题」</b>——它给你一张 32 格选题表，你看中哪格点哪格</td></tr>
+    <tr><td>写文章</td><td><b>「写稿」</b>（或直接说主题）——给你成稿，开头结尾留了「口语位」等你亲改</td></tr>
+    <tr><td>拍视频</td><td><b>「出口播稿」</b>——把文章变成能照着念的提词稿</td></tr>
+    <tr><td>做小红书封面</td><td><b>「做图卡」</b>——给你一张 3:4 封面图的设计稿</td></tr>
+    <tr><td>发之前心里没底</td><td><b>「发布前查一下」</b>——AI 逐条把关，有过不了的会直接说「退回」</td></tr>
+    <tr><td>每周日盘点</td><td><b>「盘点数据」</b>——把后台数据发给它，它给下周 3 个新选题</td></tr>
+  </table>
+  </div>
+  <p>正常顺序：选题 → 写稿 →（口播/图卡）→ 发布前查一下 → 自己最终拍板 → 发布 → 周日盘点。</p>
+
+  <h2>四、三条安全规矩（跟技能一样重要）</h2>
+  <ol>
+    <li><b>所有稿子，你自己审核后才发。</b>AI 负责写和查，点「发送」的那一下永远是你。发现哪里不像你说的，直接改。</li>
+    <li><b>孩子和家人的隐私不出现。</b>全名、正脸、学校、行程不上稿；涉及健康、钱、修行类内容必须带一句「个人体验，不构成建议」。</li>
+    <li><b>数字不许编。</b>稿子里的每个数字 AI 都要能说出处；说不出就删。</li>
+  </ol>
+
+  <h2>五、常见问题</h2>
+  <div class="qa"><p class="q">Q：它写的稿子不像我，怎么办？</p>
+  <p>A：正常。声音档案刚建的时候样本少，多喂它几篇你亲手写的东西（微信长消息、朋友圈长文），然后说一句「重训声线」。用得越久越像你。</p></div>
+  <div class="qa"><p class="q">Q：它问我要后台数据，我不懂看哪里？</p>
+  <p>A：不用懂全。打开平台后台（公众号/小红书创作者中心），把每篇的「阅读、点赞、收藏、转发」大概数字念给它就行，它会自己记表。没有数据的格子它会空着，不瞎编。</p></div>
+  <div class="qa"><p class="q">Q：文件都存到哪去了？找不到怎么办？</p>
+  <p>A：所有稿子存在你自己的工作区文件夹里，位置记录在工作区的 <code>paths.md</code> 文件里。找不到就对 AI 说：「我的工作区在哪？paths.md 在哪？」</p></div>
+  <div class="qa"><p class="q">Q：它好像没听懂我的指令 / 卡住了？</p>
+  <p>A：把这句话发给它：「请按你的技能流程走，先说明你打算用哪个技能、做什么，然后开始。」还卡住就把报错截图发给你老公，或发给它。</p></div>
+  <div class="qa"><p class="q">Q：我和家里人能用同一个文件夹吗？</p>
+  <p>A：技能可以共用，<b>声音档案一人一套</b>。第一次「建声音基座」时 AI 会问你工作区放哪——给自己选一个新位置（比如 <code>~/media-hub-你的名字/</code>），就不会和别人的混在一起。</p></div>
+
+  <h2>六、一页速查</h2>
+  <div class="card">
+    <p><b>第一次：</b>装技能 → 「看看你装了哪些技能」→「帮我建声音基座」</p>
+    <p><b>平时：</b>「给我选题」→「写稿」→「出口播稿」/「做图卡」→「发布前查一下」→ 自己拍板发布</p>
+    <p><b>每周日：</b>「盘点数据」</p>
+    <p><b>不像我：</b>喂真迹 →「重训声线」</p>
+    <p><b>卡住了：</b>「请按你的技能流程走」</p>
+  </div>
+
+  <div class="footer">lifeos-media-pack v0.2 · 技能是公共的，声线是私人的 · 稿子永远由你拍板</div>
+</div>
+</body>
+</html>

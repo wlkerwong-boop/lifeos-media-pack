@@ -1,6 +1,6 @@
 # lifeos-media-pack · 中文社媒内容闭环技能包
 
-普光师兄专属的中文社媒内容流水线，7 个 SKILL.md 技能串成闭环，面向**公众号 → 视频号 → 小红书**三平台。改造自 [charlie947/social-media-skills](https://github.com/charlie947/social-media-skills)（MIT），针对中文平台与 LifeOS 规则做了本地化。
+多用户中文社媒内容流水线，7 个 SKILL.md 技能串成闭环，面向**公众号 → 视频号 → 小红书**三平台。改造自 [charlie947/social-media-skills](https://github.com/charlie947/social-media-skills)（MIT），针对中文平台做了本地化。**技能是公共的，声线是私人的**：每个用户跑一次 `building-voice-base` 建自己的声音基座，一人一声，禁止共用。
 
 ## 闭环图
 
@@ -40,12 +40,17 @@ cp -r skills/* ~/.agents/skills/
 - 《自媒体系列化清单》管连载排期：picking-topics 管日常选题，互为补充
 - 「视频合成」技能（ffmpeg+edge-tts）：writing-koubogao 的下游
 
-## 固定路径约定
-- 声音基座：`~/Projects/media-hub/about-me.md` + `voice.md`
-- LifeOS 产出：`20-29 工作事业/24.02 自媒体运营/`（草稿池/成稿区/发布复盘），文件名守宪法 `YYYY-MM-DD-HHMMSS-主题.md`
+## 工作区与路径（v0.2 多用户机制）
+- 每个用户的工作区默认 `~/media-hub/`，内含三件套：`about-me.md` + `voice.md` + `paths.md`
+- `paths.md` 由 building-voice-base 首次运行时生成，记录该用户的成稿/草稿/复盘目录与命名规范
+- 其余 6 个技能全部从 `paths.md` 取路径，不写死任何人的目录
+- 普光师兄的既有工作区：`~/Projects/media-hub/`（paths.md 已补齐）；LifeOS 产出在 `20-29 工作事业/24.02 自媒体运营/`，文件名守宪法 `YYYY-MM-DD-HHMMSS-主题.md`
+
+## 给新用户安装
+发整个文件夹给对方（或压缩包），看《安装指南.html》，三步装好 + 第一次跑「建声音基座」。指南面向技术小白，可直接转发。
 
 ## 状态
-**v0.1 试用版**（2026-09-08）。测试记录：第一轮为实测驱动（charlie947 原版包在真实项目中的 9 项汉化缺口为基线，写作参数来自当日实测跑通值）；后续两轮测试计划见 `docs` 待补。按《宪法规则》第 1 条，满三轮测试方可转正。
+**v0.2 多用户版**（2026-09-08）。v0.1→v0.2：7 技能去个人化（称呼/路径/红线来源改为读用户自己的 about-me.md 与 paths.md），新增工作区机制与转发用安装指南。测试记录：第一轮为实测驱动（charlie947 原版包 9 项汉化缺口为基线）；v0.2 的多用户改造为结构化改动（未新增规则），沿用既有测试基线，后续两轮计划：真实周复盘一轮、新用户首跑一轮。按《宪法规则》第 1 条，满三轮测试方可转正。
 
 ## License
 MIT（继承上游）。guizang 等中文同类仓库为 AGPL，本包未引用其任何代码。
