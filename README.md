@@ -1,5 +1,7 @@
 # lifeos-media-pack · 中文社媒内容闭环技能包
 
+> **English:** AI Agent Skills for a Chinese social-media content pipeline (WeChat Official Account / Channels / Xiaohongshu): voice profile → topic matrix → drafting → video script / cover cards → pre-publish gate → weekly review. Built for non-technical creators — each user builds their own voice profile first. MIT licensed.
+
 多用户中文社媒内容流水线，7 个 SKILL.md 技能串成闭环，面向**公众号 → 视频号 → 小红书**三平台。改造自 [charlie947/social-media-skills](https://github.com/charlie947/social-media-skills)（MIT），针对中文平台做了本地化。**技能是公共的，声线是私人的**：每个用户跑一次 `building-voice-base` 建自己的声音基座，一人一声，禁止共用。
 
 ## 闭环图
@@ -34,6 +36,10 @@ cp -r skills/* ~/.claude/skills/
 # Codex / Gemini CLI / Copilot CLI（跨运行时别名目录）
 cp -r skills/* ~/.agents/skills/
 ```
+
+也可以试试技能市场命令（每个技能单独装）：`npx skills add wlkerwong-boop/lifeos-media-pack`
+
+装完第一步永远是：对 AI 说「**帮我建声音基座**」。新手请看《安装指南.html》（浏览器打开，傻瓜式）。
 
 ## 与现有系统的关系
 - Hermes 每晚 21:00 cron 往 `草稿池/` 写草稿：本包的 writing-gongzhonggao 负责把它抬成终稿
